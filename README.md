@@ -2,6 +2,11 @@
 
 See "[Implementing `if` in Ruby](http://mudge.github.com/2012/07/09/implementing-if-in-ruby.html)" for more information.
 
+## Requirements
+
+The gem currently requires Ruby 1.9 onwards as it makes use of both the new
+hash and lambda syntax.
+
 ## Usage
 
 ```ruby
