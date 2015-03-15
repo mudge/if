@@ -3,6 +3,7 @@ Gem::Specification.new do |s|
   s.summary = 'A Ruby implementation of the if conditional.'
   s.description = 'A heavily Smalltalk-inspired implementation of the if conditional without using keywords.'
   s.version = '1.2.0'
+  s.license = 'MIT'
   s.authors = ['Paul Mucur']
   s.homepage = 'https://github.com/mudge/if'
   s.email = 'ruby.if@librelist.com'

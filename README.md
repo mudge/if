@@ -38,3 +38,9 @@ nil
 # "I'm false!"
 #=> nil
 ```
+
+## License
+
+Copyright © 2015 Paul Mucur
+
+Distributed under the MIT License.
