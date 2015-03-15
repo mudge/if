@@ -5,19 +5,20 @@ RSpec.describe BasicObject do
 
   describe '#if' do
     it 'always evaluates the first block to if' do
-      expect(object.if(-> { "I'm true!" })).to eq("I'm true!")
+      expect(object.if proc { "I'm true!" }).to eq("I'm true!")
     end
 
     it 'ignores any else blocks' do
-      expect(object.if(-> { "I'm true!" },
-                       else: -> { "I'm false!" })).to eq("I'm true!")
+      expect(object.if proc { "I'm true!" },
+                       :else => proc { "I'm false!" }).to eq("I'm true!")
     end
   end
 
   describe '#if_true' do
     it 'evaluates the given block' do
-      expect { object.if_true { puts "I'm true!" } }
-        .to output("I'm true!\n").to_stdout
+      expect {
+        object.if_true { puts "I'm true!" }
+      }.to output("I'm true!\n").to_stdout
     end
 
     it 'returns the object for chaining' do
@@ -33,9 +34,9 @@ RSpec.describe BasicObject do
 
   describe 'chaining #if_true and #if_false' do
     it 'evaluates based on the original object' do
-      expect { object.if_true { puts "I'm true!"; false }
-                     .if_false { puts "I'm false!" } }
-        .to output("I'm true!\n").to_stdout
+      expect {
+        object.if_true { puts "I'm true!"; false }.if_false { puts "I'm false!" }
+      }.to output("I'm true!\n").to_stdout
     end
   end
 end
@@ -43,12 +44,12 @@ end
 RSpec.describe NilClass do
   describe '#if' do
     it 'always returns the else block' do
-      expect(nil.if(-> { "I'm true!" },
-                    else: -> { "I'm false!" })).to eq("I'm false!")
+      expect(nil.if proc { "I'm true!" },
+                    :else => proc { "I'm false!" }).to eq("I'm false!")
     end
 
     it 'does nothing by default' do
-      expect(nil.if(-> { "I'm true!" })).to be_nil
+      expect(nil.if proc { "I'm true!" }).to be_nil
     end
   end
 
@@ -60,8 +61,9 @@ RSpec.describe NilClass do
 
   describe '#if_false' do
     it 'evaluates the given block' do
-      expect { nil.if_false { puts "I'm false!" } }
-        .to output("I'm false!\n").to_stdout
+      expect {
+        nil.if_false { puts "I'm false!" }
+      }.to output("I'm false!\n").to_stdout
     end
 
     it 'returns nil' do
@@ -71,9 +73,9 @@ RSpec.describe NilClass do
 
   describe 'chaining #if_false and #if_true' do
     it 'evaluates based on the original object' do
-      expect { nil.if_false { puts "I'm false!"; true }
-                  .if_true { puts "I'm true!" } }
-        .to output("I'm false!\n").to_stdout
+      expect {
+        nil.if_false { puts "I'm false!"; true }.if_true { puts "I'm true!" }
+      }.to output("I'm false!\n").to_stdout
     end
   end
 end
@@ -81,12 +83,12 @@ end
 RSpec.describe FalseClass do
   describe '#if' do
     it 'always returns the else block' do
-      expect(false.if(-> { "I'm true!" },
-                      else: -> { "I'm false!" })).to eq("I'm false!")
+      expect(false.if proc { "I'm true!" },
+                      :else => proc { "I'm false!" }).to eq("I'm false!")
     end
 
     it 'does nothing by default' do
-      expect(false.if(-> { "I'm true!" })).to be_nil
+      expect(false.if proc { "I'm true!" }).to be_nil
     end
   end
 
@@ -108,9 +110,9 @@ RSpec.describe FalseClass do
 
   describe 'chaining #if_false and #if_true' do
     it 'evaluates based on the original object' do
-      expect { nil.if_false { puts "I'm false!"; true }
-                  .if_true { puts "I'm true!" } }
-        .to output("I'm false!\n").to_stdout
+      expect {
+        nil.if_false { puts "I'm false!"; true }.if_true { puts "I'm true!" }
+      }.to output("I'm false!\n").to_stdout
     end
   end
 end

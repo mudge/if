@@ -4,18 +4,24 @@ See "[Implementing `if` in Ruby](http://mudge.github.com/2012/07/09/implementing
 
 ## Requirements
 
-The gem currently requires Ruby 1.9 onwards as it makes use of both the new
-hash and lambda syntax.
+This library is tested on Ruby 1.8.7 and later but benefits from Ruby 1.9's
+hash and lambda literal syntax.
+
+```ruby
+"truthy".if -> { "I'm true!" }, else: -> { "I'm false!" }
+# vs.
+"truthy".if proc { "I'm true!" }, :else => proc { "I'm false!" }
+```
 
 ## Usage
 
 ```ruby
 require "if"
 
-"Some truthy object".if ->{ "I'm true!" }, else: ->{ "I'm false!" }
+"Some truthy object".if -> { "I'm true!" }, else: -> { "I'm false!" }
 #=> "I'm true!"
 
-nil.if ->{ "I'm true!" }, else: ->{ "I'm false!" }
+nil.if -> { "I'm true!" }, else: -> { "I'm false!" }
 #=> "I'm false!"
 
 # Or, if you only care about side-effects and not return value:

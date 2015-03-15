@@ -16,7 +16,7 @@ end
 
 module Falsey
   def if(_if_true, options = {})
-    if_false = options.fetch(:else, -> {})
+    if_false = options.fetch(:else, proc {})
 
     if_false.call
   end
