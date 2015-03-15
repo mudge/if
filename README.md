@@ -13,9 +13,22 @@ hash and lambda syntax.
 require "if"
 
 "Some truthy object".if ->{ "I'm true!" }, else: ->{ "I'm false!" }
-# => "I'm true!"
+#=> "I'm true!"
 
 nil.if ->{ "I'm true!" }, else: ->{ "I'm false!" }
-# => "I'm false!"
-```
+#=> "I'm false!"
 
+# Or, if you only care about side-effects and not return value:
+
+"Some truthy object"
+  .if_true { puts "I'm true!" }
+  .if_false { puts "I'm false!" }
+# "I'm true!"
+#=> "Some truthy object"
+
+nil
+  .if_true { puts "I'm true!" }
+  .if_false { puts "I'm false!" }
+# "I'm false!"
+#=> nil
+```
