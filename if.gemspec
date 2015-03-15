@@ -7,6 +7,6 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/mudge/if'
   s.email = 'ruby.if@librelist.com'
   s.files = ['lib/if.rb']
-  s.test_files = ['spec/if_spec.rb']
+  s.test_files = ['spec/if_spec.rb', 'spec/spec_helper.rb']
   s.add_development_dependency('rspec', '~> 3.2')
 end
